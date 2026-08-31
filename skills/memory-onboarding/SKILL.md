@@ -14,7 +14,7 @@ This skill works with any LLM or assistant platform. Where platform-specific set
 Basic Memory is markdown files parsed into a knowledge graph. A pile of unstructured notes is barely better than a folder of text files. The compounding value comes from four things this skill installs from day one:
 
 1. **Schemas** — note types with defined fields, so every task/contact/expense note looks the same and can be queried structurally.
-2. **Observations and relations** — categorized facts (`- [status] active`) and typed links (`- depends_on [[Other Note]]`) that turn prose into a graph.
+2. **Observations and relations** — categorized facts (`- [status] active`) and typed links (`- depends_on [[other-note]]`) that turn prose into a graph.
 3. **Instruction notes** — the rules of the system live *inside* the system, as notes the assistant loads at session start. The knowledge base becomes self-describing.
 4. **A startup router** — one small note that tells any assistant, on any platform, exactly what to load for each kind of task.
 
@@ -100,6 +100,8 @@ Build in this order — later items reference earlier ones:
 7. **Validate** → run `schema_validate` on the seed notes AND any migrated notes; fix anything it flags. Read back the router and one instruction note to confirm links resolve.
 
 Follow the write discipline in `references/conventions.md` throughout — most importantly: search before creating anything, use exact folder casing, and watch write results for duplicate-suffixed permalinks (`-1`, `-2`).
+
+Apply the mandatory write conventions from the **memory-notes** skill to every note you build here: set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on each write, preview edits as a diff before applying, and after writing re-read the note to confirm the change and that a `## Relations` section sits at the bottom.
 
 ## Phase 4 — Assistant setup
 

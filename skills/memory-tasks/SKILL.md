@@ -85,7 +85,7 @@ What future-you needs to pick up this work. Include:
 
 - **Steps are concrete and checkable** — "Implement X in file Y", not "figure out stuff"
 - **Context is for post-amnesia resumption** — Write it as if explaining to a smart person who knows nothing about what you've been doing
-- **Relations link to other entities** — `parent_task [[Other Task]]`, `related_to [[Some Note]]`
+- **Relations link to other entities** — `parent_task [[other-task]]`, `related_to [[some-note]]`
 - **Note types are normalized to snake_case** — `write_note(note_type="Task")` stores `type: task`, and `note_types=["Task"]` or `note_types=["task"]` both match it.
 
 ## Resuming After Compaction

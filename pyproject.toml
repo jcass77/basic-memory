@@ -92,6 +92,14 @@ bm = "basic_memory.cli.main:app"
 requires = ["hatchling", "uv-dynamic-versioning>=0.7.0"]
 build-backend = "hatchling.build"
 
+# Local-only personalization tooling (SOP-driven guide/skill alignment scripts).
+# It lives under src/basic_memory/ for convenient in-tree reference but is NOT
+# part of the shipped product: exclude it from the wheel so it never lands on
+# PyPI, and omit it from coverage below so it does not affect the 100% gate.
+[tool.hatch.build.targets.wheel]
+packages = ["src/basic_memory"]
+exclude = ["src/basic_memory/_personalization"]
+
 [tool.pytest.ini_options]
 pythonpath = ["src", "tests"]
 addopts = "--cov=basic_memory --cov-report term-missing"
@@ -218,6 +226,7 @@ exclude_lines = [
 
 # Exclude specific modules that are difficult to test comprehensively
 omit = [
+    "*/_personalization/*",         # Local-only guide/skill alignment tooling; not shipped, not part of the product test suite
     "*/external_auth_provider.py",  # External HTTP calls to OAuth providers
     "*/supabase_auth_provider.py",  # External HTTP calls to Supabase APIs
     "*/watch_service.py",           # File system watching - complex integration testing

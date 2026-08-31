@@ -67,10 +67,10 @@ Add a confirmed relation with `edit_note`:
 
 ```python
 edit_note(
-    identifier="API Design Decisions",
+    identifier="api-design-decisions",
     operation="insert_after_section",
     section="Relations",
-    content="- depends_on [[Rate Limiter]]",
+    content="- depends_on [[rate-limiter]]",
 )
 ```
 
@@ -92,10 +92,10 @@ search_notes(query="topic keywords")
 ```python
 # Point an older note at the one that replaces it
 edit_note(
-    identifier="DB Schema v1",
+    identifier="db-schema-v1",
     operation="insert_after_section",
     section="Relations",
-    content="- updates [[DB Schema v2]]",
+    content="- updates [[db-schema-v2]]",
 )
 ```
 
@@ -112,7 +112,7 @@ notes with `move_note`. By default the permalink stays the same after a move, so
 
 ```python
 move_note(
-    identifier="API Design Decisions",
+    identifier="api-design-decisions",
     destination_path="architecture/api-design-decisions.md",
 )
 ```
@@ -136,7 +136,7 @@ After finding a cluster of related notes, build a navigation hub.
 
 ```python
 write_note(
-    title="Architecture Decisions Index",
+    title="architecture-decisions-index",
     directory="indexes",
     tags=["architecture", "index"],
     note_type="index",
@@ -145,13 +145,13 @@ write_note(
 A hub linking architecture-related decisions and patterns.
 
 ## Decisions
-- [[Database Selection Decision]]
-- [[API Design Patterns]]
-- [[Authentication Architecture]]
+- [[database-selection-decision]]
+- [[api-design-patterns]]
+- [[authentication-architecture]]
 
 ## Patterns
-- [[Repository Pattern]]
-- [[Async Client Pattern]]
+- [[repository-pattern]]
+- [[async-client-pattern]]
 
 ## Observations
 - [index] Central hub for architecture knowledge #navigation

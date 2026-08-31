@@ -96,8 +96,8 @@ Before creating anything, present what you found and what you'd like to create:
 
 ```
 Entities found in Basic Memory:
-  - [[Sarah Chen]] (Person — existing)
-  - [[Acme Corp]] (Organization — existing)
+  - [[sarah-chen]] (Person — existing)
+  - [[acme-corp]] (Organization — existing)
 
 Proposed new entities:
   - Jordan Rivera (Person — VP Engineering at NovaTech, mentioned as project lead)
@@ -117,7 +117,7 @@ Create the primary note for the ingested content. This is the "record of what ha
 
 ```python
 write_note(
-  title="NovaTech Meeting - Jordan Rivera - Feb 22, 2026",
+  title="novatech-meeting-jordan-rivera-feb-22-2026",
   directory="meetings/2026",
   note_type="meeting",
   tags=["meeting", "novatech", "federated-learning"],
@@ -131,17 +131,17 @@ Brief one-sentence summary of what this meeting was about.
 [Preserve all source content verbatim — do not summarize or rewrite]
 
 ## Observations
-- [opportunity] NovaTech interested in integration partnership
-- [insight] Their platform handles 10K concurrent sessions, relevant to our scale needs
-- [next_step] Send technical spec document by Friday
-- [sentiment] Strong enthusiasm from their engineering team
-- [decision] Agreed to start with a proof-of-concept integration
+- [opportunities] NovaTech interested in integration partnership
+- [insights] Their platform handles 10K concurrent sessions, relevant to our scale needs
+- [next_steps] Send technical spec document by Friday
+- [sentiments] Strong enthusiasm from their engineering team
+- [decisions] Agreed to start with a proof-of-concept integration
 
 ## Relations
-- attended [[Jordan Rivera]]
-- with [[NovaTech]]
-- discussed [[Federated Learning]]
-- follow_up [[Send NovaTech Technical Spec]]
+- attended [[jordan-rivera]]
+- with [[novatech]]
+- discussed [[federated-learning]]
+- follow_up [[send-novatech-technical-spec]]
 """
 )
 ```
@@ -150,7 +150,7 @@ Brief one-sentence summary of what this meeting was about.
 
 ```python
 write_note(
-  title="Edge Computing Architecture Whitepaper",
+  title="edge-computing-architecture-whitepaper",
   directory="references",
   note_type="reference",
   tags=["edge-computing", "architecture", "reference"],
@@ -162,13 +162,13 @@ write_note(
 [Preserve relevant content — for long documents, include key sections rather than the entire text]
 
 ## Observations
-- [key_finding] Latency drops 40% with edge inference vs cloud-only
-- [technique] Model sharding across heterogeneous edge nodes
-- [limitation] Requires minimum 8GB RAM per edge node
+- [key_findings] Latency drops 40% with edge inference vs cloud-only
+- [techniques] Model sharding across heterogeneous edge nodes
+- [limitations] Requires minimum 8GB RAM per edge node
 
 ## Relations
-- relates_to [[Edge Computing]]
-- relates_to [[Model Optimization]]
+- relates_to [[edge-computing]]
+- relates_to [[model-optimization]]
 """
 )
 ```
@@ -179,18 +179,18 @@ Use categories that capture the nature of the information. Common categories for
 
 | Category | Use For |
 |----------|---------|
-| `opportunity` | Business or collaboration opportunities identified |
-| `decision` | Decisions made or agreed upon |
-| `insight` | Non-obvious understanding gained |
-| `next_step` | Concrete action items or follow-ups |
-| `sentiment` | Enthusiasm, concerns, hesitations expressed |
-| `risk` | Risks or concerns identified |
-| `requirement` | Requirements or constraints discovered |
-| `key_finding` | Important facts from reference material |
-| `technique` | Methods, approaches, or patterns described |
+| `opportunities` | Business or collaboration opportunities identified |
+| `decisions` | Decisions made or agreed upon |
+| `insights` | Non-obvious understanding gained |
+| `next_steps` | Concrete action items or follow-ups |
+| `sentiments` | Enthusiasm, concerns, hesitations expressed |
+| `risks` | Risks or concerns identified |
+| `requirements` | Requirements or constraints discovered |
+| `key_findings` | Important facts from reference material |
+| `techniques` | Methods, approaches, or patterns described |
 | `context` | Background information that may be useful later |
 
-Invent categories as needed — these are suggestions, not a fixed list.
+Choose categories from the project's common category list (plural, lowercase); extend beyond it only when a domain-specific type is genuinely needed.
 
 ## Step 7: Create Approved Entities
 
@@ -200,7 +200,7 @@ For each entity the user approved, create a structured note. Match the entity ty
 
 ```python
 write_note(
-  title="Jordan Rivera",
+  title="jordan-rivera",
   directory="people",
   note_type="person",
   tags=["person", "novatech", "engineering"],
@@ -214,13 +214,13 @@ VP of Engineering at NovaTech. Met during integration partnership discussion.
 [Role, expertise, context from meeting + any web research]
 
 ## Observations
-- [role] VP Engineering at NovaTech
+- [roles] VP Engineering at NovaTech
 - [expertise] Distributed systems, federated learning
-- [met] 2026-02-22 during integration discussion
+- [meetings] 2026-02-22 during integration discussion
 
 ## Relations
-- works_at [[NovaTech]]
-- discussed_in [[NovaTech Meeting - Jordan Rivera - Feb 22, 2026]]
+- works_at [[novatech]]
+- discussed_in [[novatech-meeting-jordan-rivera-feb-22-2026]]
 """
 )
 ```
@@ -229,7 +229,7 @@ VP of Engineering at NovaTech. Met during integration partnership discussion.
 
 ```python
 write_note(
-  title="NovaTech",
+  title="novatech",
   directory="organizations",
   note_type="organization",
   tags=["organization", "saas", "integration-partner"],
@@ -244,13 +244,13 @@ SaaS platform company. Series B stage.
 [What they offer, if discussed or researched]
 
 ## Observations
-- [stage] Series B, ~200 employees
+- [stages] Series B, ~200 employees
 - [relevance] Potential integration partner for our platform
-- [first_contact] 2026-02-22
+- [first_contacts] 2026-02-22
 
 ## Relations
-- employs [[Jordan Rivera]]
-- discussed_in [[NovaTech Meeting - Jordan Rivera - Feb 22, 2026]]
+- employs [[jordan-rivera]]
+- discussed_in [[novatech-meeting-jordan-rivera-feb-22-2026]]
 """
 )
 ```
@@ -259,7 +259,7 @@ SaaS platform company. Series B stage.
 
 ```python
 write_note(
-  title="Federated Learning",
+  title="federated-learning",
   directory="concepts",
   note_type="concept",
   tags=["concept", "machine-learning", "distributed-systems"],
@@ -270,11 +270,11 @@ write_note(
 [Brief description of the concept from the discussion context]
 
 ## Observations
-- [definition] Machine learning approach where models train across decentralized data sources
+- [definitions] Machine learning approach where models train across decentralized data sources
 - [relevance] Core technique discussed in NovaTech integration
 
 ## Relations
-- discussed_in [[NovaTech Meeting - Jordan Rivera - Feb 22, 2026]]
+- discussed_in [[novatech-meeting-jordan-rivera-feb-22-2026]]
 """
 )
 ```
@@ -296,6 +296,14 @@ Follow-Up Reminders:
 ```
 
 If using the **memory-tasks** skill, create Task notes for your action items. Otherwise, capture them as observations in the source note.
+
+## Required Conventions
+
+Every note this skill creates follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on `write_note` (and update it on any edit).
+- **Preview before editing** — when updating an existing entity, show the change as a diff before it is written.
+- **Verify after writing** — re-read the note to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
 
 ## Guidelines
 

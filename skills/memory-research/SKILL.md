@@ -108,7 +108,7 @@ After approval, create a structured note. Adapt the template to the entity type:
 
 ```python
 write_note(
-  title="Acme Corp",
+  title="acme-corp",
   directory="organizations",
   note_type="organization",
   tags=["organization", "relevant-tags"],
@@ -141,7 +141,7 @@ write_note(
 
 ```python
 write_note(
-  title="Jane Smith",
+  title="jane-smith",
   directory="people",
   note_type="person",
   tags=["person", "relevant-tags"],
@@ -169,7 +169,7 @@ write_note(
 
 ```python
 write_note(
-  title="Technology Name",
+  title="technology-name",
   directory="concepts",
   note_type="concept",
   tags=["concept", "technology", "relevant-tags"],
@@ -203,7 +203,7 @@ If the user provided context with their request, capture it in the entity:
 ```python
 # User said: "Acme Corp — saw their demo at the conference last week"
 edit_note(
-  identifier="Acme Corp",
+  identifier="acme-corp",
   operation="insert_after_section",
   section="Observations",
   content="- [context] Saw their demo at conference, week of 2026-02-17"

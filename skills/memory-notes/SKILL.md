@@ -23,14 +23,14 @@ support and simpler caching semantics. This note captures the key decisions and
 their rationale, along with open questions still to resolve.
 
 ## Observations
-- [decision] Use REST over GraphQL for simplicity #api
-- [requirement] Must support versioning from day one
-- [risk] Rate limiting needed for public endpoints
+- [decisions] Use REST over GraphQL for simplicity #api
+- [requirements] Must support versioning from day one
+- [risks] Rate limiting needed for public endpoints
 
 ## Relations
-- implements [[API Specification]]
-- depends_on [[Authentication System]]
-- relates_to [[Performance Requirements]]
+- implements [[api-specification]]
+- depends_on [[authentication-system]]
+- relates_to [[performance-requirements]]
 ```
 
 ### Frontmatter
@@ -77,19 +77,19 @@ Observations are categorized facts — the atomic units of knowledge. Each one b
 - **Content** is the fact, decision, insight, or note
 - **Hash tags** (optional) add extra metadata for filtering
 
-### Categories Are Arbitrary
+### Categories Are Free-Form but Conventional
 
-The category in brackets is free-form — use whatever label makes sense for the observation. There is no fixed list. The only rule is the `[category] content` syntax. Consistency within a project helps searchability, but invent categories freely.
+The category in brackets is free-form — there is no fixed list, so use whatever label makes sense for the observation. The only hard rule is the `[category] content` syntax. By convention, always write category names as **plural, lowercase** words (e.g. `[decisions]`, `[risks]`, `[techniques]`) because that consistency keeps observations searchable and the knowledge graph coherent. Invent new categories freely when a domain-specific type is genuinely needed, keeping the same plural-lowercase form.
 
 A few examples to illustrate the range:
 
 ```
-- [decision] Use PostgreSQL for primary data store
-- [risk] Third-party API has no SLA guarantee
-- [technique] Exponential backoff for retry logic #resilience
-- [question] Should we support multi-tenancy at the DB level?
-- [preference] Use Bun over Node for new projects
-- [lesson] Always validate webhook signatures server-side
+- [decisions] Use PostgreSQL for primary data store
+- [risks] Third-party API has no SLA guarantee
+- [techniques] Exponential backoff for retry logic #resilience
+- [questions] Should we support multi-tenancy at the DB level?
+- [preferences] Use Bun over Node for new projects
+- [lessons] Always validate webhook signatures server-side
 - [status] active
 - [flavor] Ethiopian beans work best with lighter roasts
 ```
@@ -97,8 +97,8 @@ A few examples to illustrate the range:
 ### Observation Tips
 
 - **One fact per observation.** Don't pack multiple ideas into one line.
-- **Be specific.** `[decision] Use JWT` is less useful than `[decision] Use JWT with 15-minute expiry for API auth`.
-- **Use tags for cross-cutting concerns.** `[risk] Rate limiting needed #api #security` makes this findable under both topics.
+- **Be specific.** `[decisions] Use JWT` is less useful than `[decisions] Use JWT with 15-minute expiry for API auth`.
+- **Use tags for cross-cutting concerns.** `[risks] Rate limiting needed #api #security` makes this findable under both topics.
 - **Categories are queryable.** `search_notes(entity_types=["observation"], categories=["decision"])` returns every decision observation across your knowledge base.
 
 ## Relations
@@ -108,7 +108,7 @@ Relations create edges in the knowledge graph, linking notes to each other. They
 ### Syntax
 
 ```
-- relation_type [[Target Note Title]]
+- relation_type [[target-note-title]]
 ```
 
 - **relation_type** is a descriptive verb or phrase (snake_case by convention)
@@ -119,24 +119,24 @@ Relations create edges in the knowledge graph, linking notes to each other. They
 
 | Type | Purpose | Example |
 |------|---------|---------|
-| `implements` | One thing implements another | `- implements [[Auth Spec]]` |
-| `requires` | Dependencies | `- requires [[Database Setup]]` |
-| `relates_to` | General connection | `- relates_to [[Performance Notes]]` |
-| `part_of` | Hierarchy/composition | `- part_of [[Backend Architecture]]` |
-| `extends` | Enhancement or elaboration | `- extends [[Base Config]]` |
-| `pairs_with` | Things that work together | `- pairs_with [[Frontend Client]]` |
-| `inspired_by` | Source material | `- inspired_by [[CRDT Research Paper]]` |
-| `replaces` | Supersedes another note | `- replaces [[Old Auth Design]]` |
-| `depends_on` | Runtime/build dependency | `- depends_on [[MCP SDK]]` |
-| `contrasts_with` | Alternative approaches | `- contrasts_with [[GraphQL Approach]]` |
+| `implements` | One thing implements another | `- implements [[auth-spec]]` |
+| `requires` | Dependencies | `- requires [[database-setup]]` |
+| `relates_to` | General connection | `- relates_to [[performance-notes]]` |
+| `part_of` | Hierarchy/composition | `- part_of [[backend-architecture]]` |
+| `extends` | Enhancement or elaboration | `- extends [[base-config]]` |
+| `pairs_with` | Things that work together | `- pairs_with [[frontend-client]]` |
+| `inspired_by` | Source material | `- inspired_by [[crdt-research-paper]]` |
+| `replaces` | Supersedes another note | `- replaces [[old-auth-design]]` |
+| `depends_on` | Runtime/build dependency | `- depends_on [[mcp-sdk]]` |
+| `contrasts_with` | Alternative approaches | `- contrasts_with [[graphql-approach]]` |
 
 ### Inline Relations
 
 Wiki-links anywhere in the note body — not just the Relations section — also create graph edges:
 
 ```markdown
-We evaluated [[GraphQL Approach]] but decided against it because
-the team has more experience with REST. See [[API Specification]]
+We evaluated [[graphql-approach]] but decided against it because
+the team has more experience with REST. See [[api-specification]]
 for the full contract.
 ```
 
@@ -145,7 +145,7 @@ These create `references` relations automatically. Use the Relations section for
 ### Relation Tips
 
 - **Link liberally.** Relations are what turn isolated notes into a knowledge graph. When in doubt, add the link.
-- **Create target notes if they don't exist yet.** `[[Future Topic]]` is valid — BM will resolve it when that note is created.
+- **Link only to notes that already exist.** Confirm the target note's exact title before adding `[[target]]` — forward references to not-yet-created notes create broken links and degrade the graph.
 - **Use `build_context` to traverse.** `build_context(url="memory://note-title")` follows relations to gather connected knowledge.
 - **Custom relation types are fine.** `taught_by`, `blocks`, `tested_in` — use whatever is descriptive.
 
@@ -220,15 +220,15 @@ When a note already exists, make targeted edits instead of rewriting the whole f
 ```python
 # Add a new observation under the existing Observations heading
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="insert_after_section",
   section="Observations",
-  content="- [decision] Switched to OpenAPI 3.1 for spec generation #api"
+  content="- [decisions] Switched to OpenAPI 3.1 for spec generation #api"
 )
 
 # Fix outdated information
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="find_replace",
   find_text="- [status] draft",
   content="- [status] approved"
@@ -236,10 +236,10 @@ edit_note(
 
 # Add a new relation
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="insert_after_section",
   section="Relations",
-  content="- depends_on [[Rate Limiter]]"
+  content="- depends_on [[rate-limiter]]"
 )
 ```
 
@@ -251,7 +251,7 @@ This preserves existing content and keeps the edit history clean.
 
 ```python
 write_note(
-  title="API Design Decisions",
+  title="api-design-decisions",
   directory="architecture",
   tags=["api", "architecture"],
   content="""# API Design Decisions
@@ -263,12 +263,12 @@ consumers. GraphQL remains an option for internal services where query
 flexibility matters more.
 
 ## Observations
-- [decision] Use REST for public API #api
-- [requirement] Support API versioning from v1
+- [decisions] Use REST for public API #api
+- [requirements] Support API versioning from v1
 
 ## Relations
-- implements [[API Specification]]
-- relates_to [[Backend Architecture]]"""
+- implements [[api-specification]]
+- relates_to [[backend-architecture]]"""
 )
 ```
 
@@ -282,23 +282,23 @@ Use `edit_note` to update a note in place — six operations: `append`, `prepend
 ```python
 # insert_after_section / insert_before_section — add lines at an existing heading
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="insert_after_section",
   section="Observations",
-  content="- [decision] Use OpenAPI 3.1 for spec generation #api"
+  content="- [decisions] Use OpenAPI 3.1 for spec generation #api"
 )
 
 # append / prepend — add to the end of the note or the start of the body
 # (use for time-ordered logs; neither one targets a section)
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="prepend",
   content="> Updated 2026-05-28: auth approach finalized.\n"
 )
 
 # replace_section — rewrite a named section (use for living content that stays current)
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="replace_section",
   section="Summary",
   content="Concise, current summary of the decision and its rationale."
@@ -306,7 +306,7 @@ edit_note(
 
 # find_replace — swap specific text
 edit_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   operation="find_replace",
   find_text="OpenAPI 3.0",
   content="OpenAPI 3.1"
@@ -322,7 +322,7 @@ Use `move_note` to reorganize notes into different directories:
 
 ```python
 move_note(
-  identifier="API Design Decisions",
+  identifier="api-design-decisions",
   destination_path="archive/api-design-decisions.md"
 )
 ```
