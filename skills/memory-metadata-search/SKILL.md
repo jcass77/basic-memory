@@ -165,11 +165,11 @@ confidence: 0.85
 # Auth Design
 
 ## Observations
-- [decision] Use OAuth 2.1 with PKCE for all client types #security
-- [requirement] Token refresh must be transparent to the user
+- [decisions] Use OAuth 2.1 with PKCE for all client types #security
+- [requirements] Token refresh must be transparent to the user
 
 ## Relations
-- implements [[Security Requirements]]
+- implements [[security-requirements]]
 ```
 
 Queries that find it:

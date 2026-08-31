@@ -81,6 +81,7 @@ If the user explicitly asks for a separate note (e.g., "capture this as a new no
 title: <descriptive title for the thread>
 type: note
 thread_id: <thread-id, if your agent exposes one>
+last updated at: <YYYY-MM-DD HH:mm>
 tags:
 - relevant
 - tags
@@ -98,25 +99,25 @@ The actual content. Could be decisions, a design rationale, an investigation sum
 
 ## Observations
 
-- [decision] What was decided #tag
-- [insight] Key understanding gained #tag
-- [tradeoff] Option A chosen over B because... #tag
+- [decisions] What was decided #tag
+- [insights] Key understanding gained #tag
+- [tradeoffs] Option A chosen over B because... #tag
 
 ## Relations
 
-- relates_to [[Related Concept]]
-- implements [[Parent Spec]]
+- relates_to [[related-concept]]
+- implements [[parent-spec]]
 ```
 
 ## Common Observation Categories
 
-- `[decision]` — choices made
-- `[insight]` — understanding gained
-- `[pattern]` — reusable approaches
-- `[learning]` — lessons learned
-- `[tradeoff]` — options weighed
-- `[problem]` — issues identified
-- `[solution]` — fixes applied
+- `[decisions]` — choices made
+- `[insights]` — understanding gained
+- `[patterns]` — reusable approaches
+- `[lessons]` — lessons learned
+- `[tradeoffs]` — options weighed
+- `[problems]` — issues identified
+- `[solutions]` — fixes applied
 
 ## Title
 
@@ -146,7 +147,7 @@ write_note(
     content="<markdown body — frontmatter is generated from title/tags/metadata>",
     directory="<folder>",
     tags=["..."],
-    metadata={"thread_id": "<thread-id>"},  # omit if no stable id
+    metadata={"thread_id": "<thread-id>", "last updated at": "<YYYY-MM-DD HH:mm>"},  # thread_id optional
     project="<project>"
 )
 
@@ -156,7 +157,7 @@ write_note(
     content="<new content>",
     directory="<same folder>",
     tags=["..."],
-    metadata={"thread_id": "<same thread-id>"},  # omit if no stable id
+    metadata={"thread_id": "<same thread-id>", "last updated at": "<YYYY-MM-DD HH:mm>"},  # thread_id optional
     overwrite=True,
     project="<project>"
 )
@@ -200,14 +201,14 @@ Working through the visual identity for the new product. This thread covers the 
 
 ## Observations
 
-- [decision] Primary color is navy `#2B3651` #branding
-- [decision] Accent color is orange `#F26B3A` #branding
-- [decision] Inter for body, Helvetica Neue for display #typography
-- [tradeoff] Considered teal as accent; orange tested better for warmth #branding
+- [decisions] Primary color is navy `#2B3651` #branding
+- [decisions] Accent color is orange `#F26B3A` #branding
+- [decisions] Inter for body, Helvetica Neue for display #typography
+- [tradeoffs] Considered teal as accent; orange tested better for warmth #branding
 
 ## Relations
 
-- relates_to [[Brand Strategy]]
+- relates_to [[brand-strategy]]
 ```
 
 ### Example 2 — Update capture later in the same thread
@@ -248,15 +249,15 @@ The accent went through a round of revision: an initial orange (`#F26B3A`) felt 
 
 ## Observations
 
-- [decision] Primary color is navy `#2B3651` #branding
-- [decision] Accent color is coral `#E89B7A` — warmer and more refined than the originally-chosen orange #branding
-- [decision] Geist for body, Helvetica Neue for display #typography
-- [tradeoff] Inter felt neutral but Geist edged it for spacing and modernity #typography
-- [tradeoff] Orange accent rejected as too aggressive; coral preferred #branding
+- [decisions] Primary color is navy `#2B3651` #branding
+- [decisions] Accent color is coral `#E89B7A` — warmer and more refined than the originally-chosen orange #branding
+- [decisions] Geist for body, Helvetica Neue for display #typography
+- [tradeoffs] Inter felt neutral but Geist edged it for spacing and modernity #typography
+- [tradeoffs] Orange accent rejected as too aggressive; coral preferred #branding
 
 ## Relations
 
-- relates_to [[Brand Strategy]]
+- relates_to [[brand-strategy]]
 ```
 
 Notice that:
@@ -264,6 +265,14 @@ Notice that:
 - There is **no "Changes" section** at the bottom — revisions are integrated where they belong
 - The note still reads top-to-bottom as a single coherent document
 - The `thread_id` is unchanged, so the note was updated in place rather than duplicated
+
+## Required Conventions
+
+Every write in this skill follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on `write_note` (and update it on any overwrite).
+- **Preview before editing** — when updating an existing note, show the change as a diff before it is written.
+- **Verify after writing** — re-read the note to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
 
 ## Best Practices
 

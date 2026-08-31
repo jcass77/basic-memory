@@ -119,7 +119,7 @@ After approval, create a structured note. Adapt the template to the entity type:
 
 ```python
 write_note(
-  title="Acme Corp",
+  title="acme-corp",
   directory="organizations",
   note_type="organization",
   tags=["organization", "relevant-tags"],
@@ -140,7 +140,7 @@ write_note(
 
 ## Observations
 - [relevance] Why this entity matters in user's context
-- [source] Researched on YYYY-MM-DD
+- [sources] Researched on YYYY-MM-DD
 - [additional observations from research findings]
 
 ## Relations
@@ -152,7 +152,7 @@ write_note(
 
 ```python
 write_note(
-  title="Jane Smith",
+  title="jane-smith",
   directory="people",
   note_type="person",
   tags=["person", "relevant-tags"],
@@ -167,9 +167,9 @@ write_note(
 **Notable:** [Publications, talks, projects if found]
 
 ## Observations
-- [role] Title at Organization
+- [roles] Title at Organization
 - [expertise] Key technical or domain expertise
-- [source] Researched on YYYY-MM-DD
+- [sources] Researched on YYYY-MM-DD
 
 ## Relations
 - works_at [[Organization]]"""
@@ -180,7 +180,7 @@ write_note(
 
 ```python
 write_note(
-  title="Technology Name",
+  title="technology-name",
   directory="concepts",
   note_type="concept",
   tags=["concept", "technology", "relevant-tags"],
@@ -196,9 +196,9 @@ write_note(
 **Alternatives:** [Comparable tools or approaches]
 
 ## Observations
-- [definition] What this technology does in one sentence
+- [definitions] What this technology does in one sentence
 - [maturity] Current state and adoption level
-- [source] Researched on YYYY-MM-DD
+- [sources] Researched on YYYY-MM-DD
 
 ## Relations
 - [Link to related concepts, tools, or projects in the knowledge graph]"""
@@ -214,7 +214,7 @@ If the user provided context with their request, capture it in the entity:
 ```python
 # User said: "Acme Corp — saw their demo at the conference last week"
 edit_note(
-  identifier="Acme Corp",
+  identifier="acme-corp",
   operation="append",
   section="Observations",
   content="- [context] Saw their demo at conference, week of 2026-02-17"
@@ -222,6 +222,14 @@ edit_note(
 ```
 
 This context is often the most valuable part — it's the user's relationship to the entity, which web research can't provide.
+
+## Required Conventions
+
+Every note this skill creates follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on `write_note` (and update it on any edit).
+- **Preview before editing** — when updating an existing entity, show the change as a diff before it is written.
+- **Verify after writing** — re-read the note to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
 
 ## Guidelines
 

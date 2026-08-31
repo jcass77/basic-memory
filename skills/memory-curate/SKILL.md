@@ -65,10 +65,10 @@ Add a confirmed relation with `edit_note`:
 
 ```python
 edit_note(
-    identifier="API Design Decisions",
+    identifier="api-design-decisions",
     operation="append",
     section="Relations",
-    content="- depends_on [[Rate Limiter]]",
+    content="- depends_on [[rate-limiter]]",
 )
 ```
 
@@ -90,10 +90,10 @@ search_notes(query="topic keywords")
 ```python
 # Point an older note at the one that replaces it
 edit_note(
-    identifier="DB Schema v1",
+    identifier="db-schema-v1",
     operation="append",
     section="Relations",
-    content="- updates [[DB Schema v2]]",
+    content="- updates [[db-schema-v2]]",
 )
 ```
 
@@ -110,7 +110,7 @@ notes with `move_note` — the permalink stays stable, so wiki-links keep resolv
 
 ```python
 move_note(
-    identifier="API Design Decisions",
+    identifier="api-design-decisions",
     destination_path="architecture/api-design-decisions.md",
 )
 ```
@@ -134,7 +134,7 @@ After finding a cluster of related notes, build a navigation hub.
 
 ```python
 write_note(
-    title="Architecture Decisions Index",
+    title="architecture-decisions-index",
     directory="indexes",
     tags=["architecture", "index"],
     note_type="index",
@@ -143,13 +143,13 @@ write_note(
 A hub linking architecture-related decisions and patterns.
 
 ## Decisions
-- [[Database Selection Decision]]
-- [[API Design Patterns]]
-- [[Authentication Architecture]]
+- [[database-selection-decision]]
+- [[api-design-patterns]]
+- [[authentication-architecture]]
 
 ## Patterns
-- [[Repository Pattern]]
-- [[Async Client Pattern]]
+- [[repository-pattern]]
+- [[async-client-pattern]]
 
 ## Observations
 - [index] Central hub for architecture knowledge #navigation
@@ -203,6 +203,14 @@ Organize around a specific subject:
 3. Identify gaps in the topic graph
 4. Suggest new notes to fill them
 5. Create a topic index note
+
+## Required Conventions
+
+Every edit this skill makes follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set/update `last updated at: YYYY-MM-DD HH:mm` on any note you create or edit.
+- **Preview before editing** — show the change as a diff before it is written, especially for merges and relation edits.
+- **Verify after writing** — re-read the note to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
 
 ## Best Practices
 

@@ -112,9 +112,9 @@ write_note(
 Schema for character entity notes.
 
 ## Observations
-- [convention] Major characters in characters/major/, minor in characters/minor/
-- [convention] Observation categories: trait, motivation, arc, quote, appearance, relationship, symbolism, fate
-- [convention] Relations: appears_in, contrasts_with, allied_with, commands, symbolizes, associated_with"""
+- [conventions] Major characters in characters/major/, minor in characters/minor/
+- [conventions] Observation categories: traits, motivations, arcs, quotes, appearances, relationships, symbolism, fates
+- [conventions] Relations: appears_in, contrasts_with, allied_with, commands, symbolizes, associated_with"""
 )
 ```
 
@@ -142,8 +142,8 @@ write_note(
 Schema for thematic analysis notes.
 
 ## Observations
-- [convention] Observation categories: definition, manifestation, evolution, counterpoint, quote, interpretation
-- [convention] Relations: embodied_by, contrasts_with, reinforced_by, explored_in, expressed_through"""
+- [conventions] Observation categories: definitions, manifestations, evolutions, counterpoints, quotes, interpretations
+- [conventions] Relations: embodied_by, contrasts_with, reinforced_by, explored_in, expressed_through"""
 )
 ```
 
@@ -170,9 +170,9 @@ write_note(
 Schema for chapter-level analysis notes.
 
 ## Observations
-- [convention] Chapters stored in chapters/ directory
-- [convention] Observation categories: summary, event, tone, technique, quote, significance, foreshadowing
-- [convention] Relations: features, set_in, explores, contains, employs, follows, precedes, parallels"""
+- [conventions] Chapters stored in chapters/ directory
+- [conventions] Observation categories: summaries, events, tones, techniques, quotes, significance, foreshadowing
+- [conventions] Relations: features, set_in, explores, contains, employs, follows, precedes, parallels"""
 )
 ```
 
@@ -198,8 +198,8 @@ write_note(
 Schema for location and setting notes.
 
 ## Observations
-- [convention] Observation categories: description, atmosphere, symbolism, significance, geography
-- [convention] Relations: setting_for, associated_with, symbolizes, contains, part_of"""
+- [conventions] Observation categories: descriptions, atmospheres, symbolism, significance, geography
+- [conventions] Relations: setting_for, associated_with, symbolizes, contains, part_of"""
 )
 ```
 
@@ -225,8 +225,8 @@ write_note(
 Schema for symbolic element notes.
 
 ## Observations
-- [convention] Observation categories: meaning, appearance, ambiguity, interpretation, quote, evolution
-- [convention] Relations: represents, associated_with, appears_in, contrasts_with, located_at"""
+- [conventions] Observation categories: meanings, appearances, ambiguities, interpretations, quotes, evolutions
+- [conventions] Relations: represents, associated_with, appears_in, contrasts_with, located_at"""
 )
 ```
 
@@ -252,8 +252,8 @@ write_note(
 Schema for literary technique and device notes.
 
 ## Observations
-- [convention] Observation categories: definition, usage, effect, example, significance
-- [convention] Relations: used_in, characterizes, expresses, related_to"""
+- [conventions] Observation categories: definitions, usages, effects, examples, significance
+- [conventions] Relations: used_in, characterizes, expresses, related_to"""
 )
 ```
 
@@ -293,12 +293,12 @@ write_note(
   content="""# <Character Name>
 
 ## Observations
-- [role] <Character's role in the work>
-- [appearance] <Key physical description>
+- [roles] <Character's role in the work>
+- [appearances] <Key physical description>
 
 ## Relations
-- associated_with [[<Related Character>]]
-- appears_in [[<Key Location>]]"""
+- associated_with [[<related-character>]]
+- appears_in [[<key-location>]]"""
 )
 ```
 
@@ -402,11 +402,11 @@ write_note(
   content="""# Chapter <N> - <Title>
 
 ## Observations
-- [summary] <1-2 sentence synopsis>
-- [event] <Key plot events>
-- [tone] <Emotional and stylistic atmosphere>
-- [technique] <Notable narrative techniques>
-- [quote] "<Significant passage>"
+- [summaries] <1-2 sentence synopsis>
+- [events] <Key plot events>
+- [tones] <Emotional and stylistic atmosphere>
+- [techniques] <Notable narrative techniques>
+- [quotes] "<Significant passage>"
 - [significance] <Why this chapter matters to the whole>
 - [foreshadowing] <Hints at future events>
 
@@ -415,9 +415,9 @@ write_note(
 - set_in [[<Location>]]
 - explores [[<Theme>]]
 - contains [[<Symbol>]]
-- employs [[<Literary Device>]]
-- follows [[Chapter <N-1> - <Previous Title>]]
-- precedes [[Chapter <N+1> - <Next Title>]]"""
+- employs [[<literary-device>]]
+- follows [[chapter-<n-1>-<previous-title>]]
+- precedes [[chapter-<n+1>-<next-title>]]"""
 )
 ```
 
@@ -429,7 +429,7 @@ edit_note(
   operation="append",
   heading="Observations",
   content="""- [arc] Ch.<N>: <What happens to this character>
-- [quote] "<Attributed quote>" (Ch.<N>)"""
+- [quotes] "<Attributed quote>" (Ch.<N>)"""
 )
 ```
 
@@ -451,22 +451,22 @@ Fix the heading discipline before batch two; a section read is only as good as t
 
 | Category | What to Look For |
 |----------|-----------------|
-| `[summary]` | 1-2 sentence chapter synopsis |
-| `[event]` | Key plot events (actions, revelations, arrivals) |
-| `[tone]` | Emotional and stylistic atmosphere |
-| `[technique]` | Narrative innovations (POV shifts, structural experiments, genre blending) |
-| `[quote]` | Memorable or thematically significant passages |
+| `[summaries]` | 1-2 sentence chapter synopsis |
+| `[events]` | Key plot events (actions, revelations, arrivals) |
+| `[tones]` | Emotional and stylistic atmosphere |
+| `[techniques]` | Narrative innovations (POV shifts, structural experiments, genre blending) |
+| `[quotes]` | Memorable or thematically significant passages |
 | `[significance]` | Why this chapter matters to the whole |
 | `[foreshadowing]` | Hints at future events |
 
 ### Entity Enrichment Per Chapter
 
 As each chapter is processed, append observations to relevant entities:
-- **Characters**: `[arc]` moments, new `[trait]` revelations, `[quote]` attributions
-- **Themes**: `[manifestation]` in this chapter, `[evolution]` shifts
-- **Symbols**: `[appearance]` with context, new `[interpretation]` angles
-- **Locations**: `[atmosphere]` as described, `[significance]` in scene
-- **Literary devices**: `[example]` from this chapter
+- **Characters**: `[arcs]` moments, new `[traits]` revelations, `[quotes]` attributions
+- **Themes**: `[manifestations]` in this chapter, `[evolutions]` shifts
+- **Symbols**: `[appearances]` with context, new `[interpretations]` angles
+- **Locations**: `[atmospheres]` as described, `[significance]` in scene
+- **Literary devices**: `[examples]` from this chapter
 
 ### Adding Prose and Interpretation
 
@@ -504,10 +504,10 @@ is not decoration: without it these return the first 10 rows and the work queue 
 items long.
 
 ### Character Arcs
-For each major character, write a full `[arc]` summary observation covering their trajectory across the work.
+For each major character, write a full `[arcs]` summary observation covering their trajectory across the work.
 
 ### Theme Evolution
-For each theme, add `[evolution]` observations tracing how it develops from introduction to resolution.
+For each theme, add `[evolutions]` observations tracing how it develops from introduction to resolution.
 
 ### Chapter Parallels
 Add `parallels` and `contrasts_with` relations between structurally similar chapters (e.g., mirrored scenes, repeated settings, thematic echoes).
@@ -517,7 +517,7 @@ Create synthesis notes in `analysis/`:
 
 ```python
 write_note(
-  title="Narrative Structure",
+  title="narrative-structure",
   directory="analysis",
   note_type="note",
   tags=["analysis", "structure"],
@@ -526,14 +526,14 @@ write_note(
 Analysis of the work's narrative architecture.
 
 ## Observations
-- [structure] <Overall arc description>
-- [technique] <Key narrative strategies>
+- [structures] <Overall arc description>
+- [techniques] <Key narrative strategies>
 ...
 
 ## Relations
 - analyzes [[<Protagonist>]]
-- analyzes [[<Key Character>]]
-- explores [[<Central Theme>]]
+- analyzes [[<key-character>]]
+- explores [[<central-theme>]]
 ..."""
 )
 ```
@@ -748,6 +748,14 @@ This pipeline works for any literary text. Adjust schemas for genre:
 - **memory-metadata-search** — Querying notes by frontmatter fields
 - **memory-lifecycle** — Archiving completed analysis phases
 
+## Required Conventions
+
+Every note this skill creates follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on `write_note` (and update it on any enrichment edit).
+- **Preview before editing** — when enriching an existing entity, show the change as a diff before it is written.
+- **Verify after writing** — re-read the note to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
+
 ## Guidelines
 
 - **Seed before processing.** Create entity stubs first so wiki-links resolve immediately during chapter processing.
@@ -760,6 +768,6 @@ This pipeline works for any literary text. Adjust schemas for genre:
 - **Enrich iteratively.** Entity notes grow richer with each chapter. Don't try to write the perfect character note upfront — append as you go.
 - **Add prose for depth.** After structured data is in place, add interpretive essays to major notes. The prose captures what observations cannot: argument, nuance, opinion, and voice.
 - **Validate periodically.** Run `schema_validate` after each batch, not just at the end. Catch drift early.
-- **Quote generously.** Literary analysis lives on textual evidence. Include significant quotes as `[quote]` observations with chapter attribution.
+- **Quote generously.** Literary analysis lives on textual evidence. Include significant quotes as `[quotes]` observations with chapter attribution.
 - **Review and revise.** After completing all chapters, review the full graph from an external perspective. Look for thin notes, missing connections, and gaps in coverage. The first pass is never the last.
 - **Analysis comes last.** Synthesis notes in `analysis/` should be written after all chapters are processed, when you have the full picture.

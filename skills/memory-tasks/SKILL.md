@@ -53,7 +53,8 @@ write_note(
     "status": "active",
     "priority": "high",
     "current_step": 1,
-    "steps": ["First step", "Second step", "Third step"]
+    "steps": ["First step", "Second step", "Third step"],
+    "last updated at": "2026-08-31 08:14"
   },
   tags=["task"],
   content="""# Descriptive task name
@@ -84,7 +85,7 @@ What future-you needs to pick up this work. Include:
 
 - **Steps are concrete and checkable** — "Implement X in file Y", not "figure out stuff"
 - **Context is for post-amnesia resumption** — Write it as if explaining to a smart person who knows nothing about what you've been doing
-- **Relations link to other entities** — `parent_task [[Other Task]]`, `related_to [[Some Note]]`
+- **Relations link to other entities** — `parent_task [[other-task]]`, `related_to [[some-note]]`
 - **`note_types` is case-sensitive** — `write_note(note_type="Task")` stores the type as lowercase `task` in frontmatter. Use `note_types=["task"]` (lowercase) in search queries.
 
 ## Resuming After Compaction
@@ -155,6 +156,14 @@ With BM's schema system, tasks are fully queryable:
 | `search_notes("blockers", note_types=["task"])` | Tasks with blockers |
 | `schema_validate(noteType="Task")` | Validate all tasks against schema |
 | `schema_diff(noteType="Task")` | Detect drift between schema and actual task notes |
+
+## Required Conventions
+
+Every task note this skill creates follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — set `last updated at: YYYY-MM-DD HH:mm` via `metadata` on `write_note` (and update it on every status/step change).
+- **Preview before editing** — when updating a task, show the change as a diff before it is written.
+- **Verify after writing** — re-read the task to confirm the change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
 
 ## Guidelines
 

@@ -172,6 +172,14 @@ Some status changes don't require a folder move — "paused" or "blocked" items 
 - **memory-notes**: Use search-before-create (from memory-notes) to find the entity before transitioning it.
 - **memory-defrag**: Periodic defrag can identify stale active items that should be archived.
 
+## Required Conventions
+
+Every status change this skill makes follows the mandatory conventions in the **memory-notes** skill:
+
+- **Timestamp every write** — update `last updated at: YYYY-MM-DD HH:mm` whenever you change a note's status or frontmatter.
+- **Preview before editing** — show the frontmatter change as a diff before it is written.
+- **Verify after writing** — re-read the note to confirm the status change and the updated timestamp, and confirm the `## Relations` section is present at the bottom.
+
 ## Guidelines
 
 - **Archive, never delete.** The knowledge graph benefits from historical context.
