@@ -144,10 +144,9 @@ Preferences related to the discovery and use of MCP server tools.
 - Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you SHOULD automatically use the Context7 MCP tools to resolve library id and get library docs without me having to explicitly ask
 
 ### git-mcp
-- You MUST use the GitHub API when fetching pages from github.com because GitHub's `robots.txt` blocks access for agents
-- This url will not work with the `web_fetch` tool:  https://github.com/basicmachines-co/basic-memory/blob/main/CHANGELOG.md
-- This is the equivalent API URL that you SHOULD use instead  https://api.github.com/repos/basicmachines-co/basic-memory/contents/CHANGELOG.md
-- Prefer using the `fetch_generic_documentation` tool to retrieve markdown, text, and other types of documents and the `fetch_generic_url_content` tool for source and other types of files. 
+- You MUST NOT use the `web_fetch` tool against `github.com` or `api.github.com` URLs because GitHub's `robots.txt` blocks agent access and the request will fail
+- When fetching content from github.com (repositories, files, issues, PRs, releases), use tools in this order: (1) the `github` MCP server tools (e.g. `@github/get_file_contents`, `@github/search_code`, `@github/issue_read`) if available, (2) the `gh` CLI as a fallback (e.g. `gh api repos/{owner}/{repo}/contents/{path}`, `gh repo view`, `gh pr view`), (3) `web_fetch` only as a last resort
+- Example: to read `CHANGELOG.md` from `basicmachines-co/basic-memory`, use `@github/get_file_contents` or `gh api repos/basicmachines-co/basic-memory/contents/CHANGELOG.md` — do NOT use `web_fetch` with the `https://github.com/...` or `https://api.github.com/...` URL
 ## README
 Preferences related to creating and updating project `README.md` files.
 
