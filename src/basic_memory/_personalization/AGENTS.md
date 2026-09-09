@@ -83,6 +83,10 @@ Multi-step workflows with RFC 2119 constraints:
 - `update-basic-memory-ai-assistant-guide.sop.md` — regenerate the personalized
   guides (`docs/ai-assistant-guide-extended.md` and
   `src/basic_memory/mcp/resources/ai_assistant_guide.md`) from upstream.
+- `sync-upstream-and-realign.sop.md` — rebase a personal fork on `upstream/main`
+  (avoiding the `git pull` / fork-point traps), verify re-alignment
+  non-destructively, regenerate the lockfile, and force-with-lease push to the
+  fork.
 
 ## Preference source
 

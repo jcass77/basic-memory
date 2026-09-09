@@ -25,9 +25,10 @@ _personalization/
 │   ├── conventions.py           # single source of truth for the conventions
 │   ├── align_skills.py          # applies the conventions (dry-run/apply/check/lock)
 │   └── guide_validation.py      # validates guides/skills against the conventions
-├── agent-sops/                  # the two SOPs that drive the workflow
+├── agent-sops/                  # the SOPs that drive the workflow
 │   ├── align-basic-memory-skills.sop.md
-│   └── update-basic-memory-ai-assistant-guide.sop.md
+│   ├── update-basic-memory-ai-assistant-guide.sop.md
+│   └── sync-upstream-and-realign.sop.md
 ├── config/
 │   └── user-preferences.md      # the preference source the SOPs read
 ├── tests/                       # unit tests for scripts/ (run manually)
@@ -74,5 +75,37 @@ code is coverage-omitted):
 python -m pytest src/basic_memory/_personalization/tests -o addopts=""
 ```
 
-See the two SOPs in `agent-sops/` for the full step-by-step alignment
-procedures.
+See the SOPs in `agent-sops/` for the full step-by-step procedures.
+
+## Syncing the fork on upstream
+
+When pulling new upstream changes into a personal fork, follow
+`agent-sops/sync-upstream-and-realign.sop.md` rather than a bare `git pull` /
+`git rebase upstream/main`. The short version, with the traps that SOP exists to
+prevent:
+
+```bash
+git fetch upstream
+# NOT `git pull` (rebases onto the stale fork) and NOT a bare
+# `git rebase upstream/main` (fork-point replays ~150 applied commits):
+git rebase --no-fork-point upstream/main
+
+# Prove each drifted skill is "upstream + personalization", nothing missing,
+# WITHOUT overwriting manual personalization — compare a throwaway transform of
+# the pristine upstream file against the committed local file:
+tmp=$(mktemp -d); git show upstream/main:skills/<name>/SKILL.md > "$tmp/SKILL.md"
+PYTHONPATH=src/basic_memory/_personalization \
+  uv run python -m scripts.align_skills --apply "$tmp/SKILL.md"
+diff "$tmp/SKILL.md" skills/<name>/SKILL.md   # expect only personalization variance
+
+# Refresh the lock (benign post-rebase drift) and publish:
+python -m scripts.align_skills --write-lock --skills
+python -m scripts.align_skills --verify-lock --skills   # expect exit 0
+git push --force-with-lease origin main
+```
+
+**Do not** run `align_skills --apply` on the real `skills/memory-literary-analysis/SKILL.md`:
+its personalization is richer than the deterministic transformer (categories
+outside the `SINGULAR_TO_PLURAL` map, preserved `<n-1>` placeholders, and a
+manual "Required Conventions" section), so `--apply` would regress it. Re-apply
+those parts by hand.
