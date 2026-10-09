@@ -4,7 +4,7 @@
 
 Basic Memory is a persistent Markdown knowledge base shared by the user and their AI assistants. Use it for information that should survive this conversation: decisions, discoveries, plans, preferences, and connected reference material.
 
-**For comprehensive coverage**: See the [Extended AI Assistant Guide](https://github.com/basicmachines-co/basic-memory/blob/main/docs/ai-assistant-guide-extended.md) with detailed examples, advanced patterns, and self-contained sections.
+**For comprehensive coverage**: See the [Extended AI Assistant Guide](https://github.com/jcass77/basic-memory/blob/main/docs/ai-assistant-guide-extended.md) with detailed examples, advanced patterns, and self-contained sections.
 
 ## Start usefully
 

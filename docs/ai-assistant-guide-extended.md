@@ -2958,7 +2958,7 @@ await edit_note(
 
 This extended guide provides comprehensive coverage of Basic Memory's capabilities for AI assistants. Each section is designed to be self-contained so you can reference or copy specific sections as needed.
 
-For the condensed quick-reference version, see the [AI Assistant Guide](https://github.com/basicmachines-co/basic-memory/blob/main/src/basic_memory/mcp/resources/ai_assistant_guide.md).
+For the condensed quick-reference version, see the [AI Assistant Guide](https://github.com/jcass77/basic-memory/blob/main/src/basic_memory/mcp/resources/ai_assistant_guide.md).
 
 For complete documentation including setup, integrations, and advanced features, visit [docs.basicmemory.com](https://docs.basicmemory.com).
 
