@@ -35,41 +35,17 @@ You MUST follow these guidelines when creating or editing notes using the basic-
 - Update permalinks immediately when moving or renaming notes because maintaining link integrity is critical for knowledge graph navigation
 - Use the `find_replace` operation to target specific sections for edits because precise targeting reduces unintended modifications and maintains content integrity
 - When editing an existing note, you MUST first show me the diffs in markdown format with ANSI color codes (red for deletions, green for additions) in the terminal preview before executing the `find_replace` tool because it is hard to read the tool's `content` parameter to confirm the edits are correct
-
-**❌ Bad Example - Direct execution without preview:**
-```
-AI: I'll update the session summary now.
-[Immediately calls edit_note tool without showing changes]
-```
-
-**✅ Good Example - Show diff first, then request permission:**
-```
-AI: I'll show you the proposed changes as a diff, then apply them.
-
-**Proposed changes to session summary:**
-
-	```diff
-	 ### **Key Learnings**
-	 - Original content here
-	+
-	+### **New Section**
-	+- New content added here
-	```
-
-[After user confirms with "proceed" or similar]
-[Then calls edit_note tool]
-```
 - Always update the 'last updated at' frontmatter field when a note has been created or edited with format `last updated at: {{YYYY-MM-DD}} {{HH:mm}}` because tracking modification timestamps enables chronological navigation and helps identify stale content
 - After editing a note, ALWAYS perform these two mandatory verification steps: (1) read the note again to confirm changes were applied correctly including the 'last updated at' frontmatter field, and (2) ensure the 'Relations' section appears at the bottom of the note because edit verification prevents content corruption and proper section placement maintains knowledge graph navigation standards
 
 #### Classifications
-- Notes typically fall into one of the following categories. We store different types of notes in different folders, and use different templates for each, because this increases standardisation and gives context on what a note contains and how it should be used.
-	- **Context Sources:** a 'context source' is a note that describes or references external sources that we can add to your context to increase its knowledge on a particular subject. We add context sources because this lets you know where it can find more information on particular topics. Save context sources in the 'context-sources' folder
-	- **References:** Short notes that reference facts and figures that we want to remember. These typically do not change very often. The difference between a context source and a reference is that references are self-contained, stand-alone sources of information. We create reference notes because they allow us to retrieve useful facts about a topic we are working on. Store reference notes in the 'references' folder
-	- **Session Summaries**: A session summary note contains a summary of the interaction with an agent. We typically refer to a 'session' as all of the interactions that occurred on that date. We create session summaries because they let you know what we were working on recently and ensure continuity for long-running projects or research. Store session summaries in the session-summaries folder (i.e. `write_note` with `"folder": "session-summaries"`)
-	- **Todo**: A list of todo items that we need to keep track off. We will usually have only one todo note in our vault. We create todos because this allows us to keep track of things we want to accomplish or try next. Ensure that we always have a single todo note with permalink /todo
-	- **Issues**: An issue note documents a problem encountered, its root cause, and resolution. We create issue notes because they serve as a searchable troubleshooting knowledge base for recurring problems. Store issue notes in the 'issues' folder
-	- **General:** A general note does not fall into any of the other classifications. It typically uses the templates/core.md template and MUST be stored in the project root folder (i.e. `write_note` with `"directory": "."`)
+- Notes fall into one of these types, each stored in its own folder with its own template:
+	- **Context Sources** → `context-sources/` — references external sources that can be added to context for more on a subject
+	- **References** → `references/` — self-contained, standalone facts/figures that rarely change
+	- **Session Summaries** → `session-summaries/` — summary of one date's interactions, for continuity across sessions
+	- **Todo** → root, permalink `/todo` — the single running todo list (always exactly one)
+	- **Issues** → `issues/` — a problem, its root cause, and resolution (searchable troubleshooting)
+	- **General** → root (`"directory": "."`) — anything else; uses `templates/core.md`
 - You MUST ask me what type of note to create if you are unsure.
 - Use snake_case for all `note_type` values (e.g. `session_summary`, `context_source`) because Basic Memory's code normalizes `note_type` to snake_case internally via `to_snake_case()` — using kebab-case or other formats creates inconsistency between what you pass and what gets stored in frontmatter
 
@@ -79,33 +55,9 @@ AI: I'll show you the proposed changes as a diff, then apply them.
 ### Categories
 - Use categories to classify the semantic type of observations because categories define what kind of information it is rather than what topic it covers
 - Apply one category per observation because this keeps each observation a single atomic, classifiable fact
-- Categories are free-form — there is no fixed list, so choose whatever label best describes the semantic type of the observation. The common categories below are a convenient starting palette, not a closed set; invent new categories whenever a more specific type fits
+- Categories are free-form — there is no fixed list, so choose whatever label best describes the semantic type of the observation. Common starting examples (not a closed set): `[decisions]`, `[facts]`, `[techniques]`, `[requirements]`, `[insights]`, `[problems]`, `[solutions]`. Invent new categories whenever a more specific type fits
 - Always write category names as plural, lowercase words because standardising on this convention makes it easier to find related categories later on. Suggest alternative category names if just changing the current name to its plural form will produce a word that is not considered proper English
 - Choose the most specific category that fits the observation because precise classification improves semantic search and filtering capabilities
- 
-### Common Categories
-- `[capabilities]`: System or tool capabilities
-- `[decisions]`: Choices made
-- `[examples]`: Example implementations or use cases
-- `[facts]`: Objective information
-- `[features]`: Product or system features
-- `[guidelines]`: Best practices and standards
-- `[ideas]`: Thoughts and concepts
-- `[implementations]`: Technical implementations
-- `[insights]`: Key realizations and understanding gained
-- `[integrations]`: System integrations
-- `[knowledge]`: General knowledge and learnings
-- `[patterns]`: Reusable approaches identified
-- `[preferences]`: User preferences and settings
-- `[problems]`: Issues identified
-- `[questions]`: Open questions
-- `[references]`: Reference materials
-- `[repositories]`: Code repositories
-- `[requirements]`: Needs and constraints
-- `[solutions]`: Resolutions and fixes applied
-- `[specifications]`: Technical specifications
-- `[techniques]`: Methods and approaches
-- `[tradeoffs]`: Options weighed and rationale for choices
 
 ### Tags
 - Create nested tags by using forward slashes (`/`) in the tag name, for example  `#preferences/notes`and `#preferences/responses` because nested tags define tag hierarchies that make it easier to find and filter related tags
@@ -149,38 +101,15 @@ Preferences related to the discovery and use of MCP server tools.
 ## README
 Preferences related to creating and updating project `README.md` files.
 
-- You MUST NOT list basic-memory notes when creating or updating sections in `README.md` that show the project structure because individual notes are not relevant to the overall project layout and function
-- You MUST only generate the project structure to folder depth 2 because deeply nested structure diagrams are difficult to read and to not add meaningful additional context
-- This entry **IS NOT** aligned with my preferences because it shows individual `.md` entries (i.e. notes) in the `basic-memory` folder structure **and** shows `nested-folder`, which is an example of a deeply nested folder beyond our folder depth preferences
+- You MUST NOT list basic-memory notes (individual `.md` files) when showing project structure in a `README.md` because individual notes are not relevant to the overall layout
+- You MUST only generate the project structure to folder depth 2 because deeper diagrams are hard to read and add no meaningful context
+- Example of an aligned structure diagram (folders only, depth 2, no individual notes):
+
 ```markdown
 ## Project Structure
 
 {{project-root-folder}}/
 ├── basic-memory/              # Basic Memory knowledge base
-    ├── config/                # User preferences and session templates
-    │   ├── user-preferences.md # User preference configuration
-    │   └── session-initialization.md # Session setup templates
-    ├── notes/                 # Knowledge base content. THIS IS THE ROOT OF THE BASIC-MEMORY PROJECT
-    │   ├── context-sources/   # Documentation source references
-    │   ├── session-summaries/ # GenAI session summary notes
-    │   ├── references/        # Reference materials and links
-    │   └── todo.md            # Task management
-    │   └── nested-folder/     # Deeply nested folder example
-    ├── templates/             # Templates for creating Basic Memory notes
-    │   ├── core.md            # Core note template
-    │   ├── context-sources.md # Context source template
-    │   ├── session-summary.md # Session summary template
-    │   └── todo.md            # Todo template
-    └── .project-name          # Project identifier
-```
-
-- This entry **IS** aligned with my preferences because it only shows the basic-memory folder structure, but not individual `.md` files (i.e. notes)
-```markdown
-## Project Structure 
-
-{{project-root-folder}}/
-├── basic-memory/              # Basic Memory knowledge base
-│   ├── config/                # User preferences and session templates
 │   ├── notes/                 # Knowledge base content
 │   ├── templates/             # Templates for creating Basic Memory notes
 │   └── .project-name          # Project identifier
